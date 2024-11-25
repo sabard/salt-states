@@ -1,29 +1,18 @@
 base:
     '*':
         - timezone-new_york
-        - ssh-config
-        - sudoers
-        - basic-cli
+#        - ssh-config
+#        - sudoers
+#        - pkg-gitlab-runner
+#        - grub-cfg
+#        - user-home
 
-    'hostrole:workstation':
+    'hostrole:supervisor':
         - match: pillar
-        - pyenv
+        - kubernetes
+        - k8s-supervisor
 
-    'hostrole:runner':
+    'hostrole:node':
         - match: pillar
-        - grub-default
-        - pkg-gitlab-runner
-
-    'hostrole:coordinator':
-        - match: pillar
-        - grub-default
-
-    'hostrole:licorice':
-        - match: pillar
-        - grub-default
-        - user-home
-        - grub-rt
-        - pyenv
-        - shielding
-        - x-window-system
-        - licorice
+        - kubernetes
+        - k8s-node

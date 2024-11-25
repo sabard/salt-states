@@ -27,26 +27,12 @@ licorice-repo:
             - sls: user-home
             - licorice-pkgs
 
-licorice-pyenv-venv:
-    file.managed:
-        - name: /home/lico/licorice/.python-version
-        - source: salt://licorice/.python-version
-        - user: lico
-        - group: lico
-        - require:
-            - sls: pyenv
-
 licorice-install:
     cmd.run:
         - name: /home/lico/licorice/install/env_setup.sh
         - runas: lico
-        - env:
-            - LICO_SKIP_DEPS: 1
-        - shell: /bin/bash
-        - cwd: /home/lico/licorice
         - require:
             - licorice-repo
-            - licorice-pyenv-venv
             - sls: pyenv
 
 licorice-permissions:
@@ -60,3 +46,12 @@ licorice-groups:
         - groups:
             - lp
         - remove_groups: False
+
+licorice-pyenv-venv:
+    file.managed:
+        - name: /home/lico/licorice/.python-version
+        - source: salt://licorice/.python-version
+        - user: lico
+        - group: lico
+        - require:
+            - licorice-install
