@@ -27,11 +27,15 @@ kubeadm_init:
 
 flannel_apply:
     cmd.run:
-        - name: kubectl apply -f https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml
+        - name: kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
         - runas: {{USER}}
         # - require:
         #     - {{HOME}}/.kube
         #     - {{HOME}}/.kube/config
+
+# Helm
+# install helm
+# install yq
 
 # can taint the supervisor if we want images to run on the control-plane
 # kubectl taint nodes --all node-role.kubernetes.io/control-plane-
